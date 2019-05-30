@@ -1,5 +1,5 @@
 [options]
-font = Hack Nerd Font Mono 11
+font = Hack Nerd Font Mono 10
 scroll_on_output = false
 scroll_on_keystroke = true
 audible_bell = false

@@ -24,7 +24,7 @@ bindsym --release Control+Shift+Print exec xfce4-screenshooter -cr
 set $mod Mod4
 floating_modifier $mod
 
-for_window [class="^.*"] border pixel 3
+for_window [class="^.*"] border pixel 2
 
 assign [class="Termite"] 1
 assign [class="Firefox"] 2
@@ -42,9 +42,6 @@ smart_borders on
 bindsym $mod+Return exec --no-startup-id termite
 bindsym $mod+r exec --no-startup-id rofi -show drun -display-drun "Run app"
 bindsym Mod1+Tab exec --no-startup-id rofi -show window -display-window "App switch"
-bindsym Mod1+e exec --no-startup-id pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo -5%
-bindsym Mod1+r exec --no-startup-id pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo +5%
-bindsym Mod1+m exec --no-startup-id pactl set-sink-mute 0 toggle
 
 bindsym Mod1+q kill
 
@@ -102,6 +99,8 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
+bindsym $mod+Ctrl+l exec --no-startup-id betterlockscreen --lock blur -- --timestr '%l:%H:%S'; mode "default"
+
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="bubble"] floating enable
 for_window [window_role="task_dialog"] floating enable
@@ -111,11 +110,9 @@ for_window [window_type="menu"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Simplescreenrecorder"] floating enable
 
-set $Locker betterlockscreen
-
 set $mode_system System (l) lock, (e) logout, (s) suspend, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id $Locker -l, mode "default"
+    bindsym l exec --no-startup-id betterlockscreen --lock blur -- --timestr '%l:%H:%S'; mode "default"
     bindsym e exec --no-startup-id i3-msg exit, mode "default"
     bindsym s exec --no-startup-id systemctl suspend, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
